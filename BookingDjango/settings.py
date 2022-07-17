@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'table_booking',
 
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SMTP
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'balu.user961625@gmail.com'
+EMAIL_HOST_PASSWORD = 'jofhsylxwyjknamn'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
