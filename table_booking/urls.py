@@ -8,5 +8,4 @@ urlpatterns = [
     path('booking/admin/<int:pk>/', EditTableAPIView.as_view(), name='edit_table'),
     path('booking/select/', TableSelectionAPIView.as_view(), name='select'),
     path('booking/cancel/<int:pk>/', BookingCancelAPIView.as_view(), name='cancel'),
-
 ]

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,13 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(cdk9t-xuohx9e51_%j#2p7_bghlly3sy)7uq3=u)mbrs%9oqg'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'table_booking',
 
     'rest_framework',
-
 ]
 
 MIDDLEWARE = [
@@ -81,8 +80,12 @@ WSGI_APPLICATION = 'BookingDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get("PG_ENGINE"),
+        'NAME': os.environ.get("PG_NAME"),
+        'USER': os.environ.get("PG_USER"),
+        'PASSWORD': os.environ.get("PG_PASS"),
+        'HOST': os.environ.get("PG_HOST"),
+        'PORT': os.environ.get("PG_PORT")
     }
 }
 
@@ -131,6 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SMTP
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'balu.user961625@gmail.com'
-EMAIL_HOST_PASSWORD = 'jofhsylxwyjknamn'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
